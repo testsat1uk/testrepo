@@ -1,0 +1,18 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "description": "CYpress Dashboard Tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress": "cypress open"
+  },
+  "author": "Satheesh",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^3.1.4"
+  },
+  "dependencies": {
+    "js-cookie": "^2.1.4"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "baseUrl": "https://insights.streetbees.com",
+
+  "env":{
+  	"userName":"admin@streetbees.com",
+  	"password":"Dzb6mEKA8AiKRk7",
+  	"client": "test",
+  	"dashBoard": "demoboardtest",
+  	"api_url": "https://dashlord-api.streetbees.com"
+  },
+  "projectId": "yc8eyx"
+}

@@ -1,0 +1,9 @@
+{
+	"baseUrl": "https://insights.streetbees.com",
+
+	"env":{
+  	"userName":"satheesh@streetbees.com",
+  	"password":"Kanishka27$",
+  	"api_url": "https://dashlord-api.streetbees.com"
+  }
+}
