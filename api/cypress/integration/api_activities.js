@@ -1,7 +1,5 @@
-/// <reference types="Cypress" />
 
 describe('User - Activities', () => {
-
 //Anonymous token, User Login Token, Refresh Token
     it('Anonymous token, User Login Token, User Refresh Token, Submission Id, Project Id', () =>{
         cy.anonymous_token();
