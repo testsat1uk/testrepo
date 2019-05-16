@@ -1,14 +1,12 @@
-/// <reference types="Cypress" />
 
 describe('User - Answers', () => {
 
-//Anonymous token, User Login Token, Refresh Token
-    it('Anonymous token, User Login Token, User Refresh Token', () =>{
+    beforeEach(() => {
         cy.anonymous_token();
         cy.login_token();
-        cy.submission_project_id();
+        cy.project_submissions();
+        cy.progressCard();
     })
-
 
 	//Submission - Answers 
     it('Submission - Answers', () => {
@@ -28,6 +26,35 @@ describe('User - Answers', () => {
                    expect(response.body.data[0]).not.to.be.empty;
                    Cypress.env({answer_id: response.body.data[0].id});
                    Cypress.env({question_id: response.body.data[0].question_id});
+                }
+                else
+                    expect(response.body.data[0]).to.be.empty;
+        })         
+    })
+
+    //Submission in progress - Answers 
+    it('Submission in progress - Answers', () => {
+        cy
+            .request({
+                method:'GET',
+                url:'v2/submissions/' + Cypress.env('progress_submission_id')+'/answers',
+                headers:{
+                    'content-type':'application/json',
+                    'accept':'application/json',
+                    'authorization':'Bearer '+Cypress.env('login_token')
+                }
+            })
+            .then((response) => {
+                expect(response.status).to.eq(200);
+                if(Array.isArray(response.body.data) && response.body.data.length>0){
+                   expect(response.body.data[0]).not.to.be.empty;
+                    Loop1: for (var i=0; i<response.body.data.length;i++){
+                            if(response.body.data[i].response_type == 'text'){
+                                Cypress.env({progress_answer_id: response.body.data[i].id});
+                                Cypress.env({progress_question_id: response.body.data[i].question_id})
+                                break Loop1;
+                            } 
+                        }
                 }
                 else
                     expect(response.body.data[0]).to.be.empty;
@@ -68,14 +95,15 @@ describe('User - Answers', () => {
         cy
             .request({
                 method:'PUT',
-                url:'v2/submissions/' + Cypress.env('submission_id')+'/answers/'+Cypress.env('answer_id'),
+                url:'v2/submissions/' + Cypress.env('progress_submission_id')+'/answers/'
+                    +Cypress.env('progress_answer_id'),
                 headers:{
                     'content-type':'application/json',
                     'accept':'application/json',
                     'authorization':'Bearer '+Cypress.env('login_token')
                 },
                 body:{
-                    'response_text':'Great'
+                    'response_text':'Great (update)'
                 }
 
             })

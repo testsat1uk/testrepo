@@ -1,12 +1,10 @@
-/// <reference types="Cypress" />
 
 describe('Recover Password', () => {
 
-//Anonymous Token
-	it('Anonymous Token, Login Token, Refresh Token', () => {
-		cy.anonymous_token();
-		cy.login_token();
-	})
+    beforeEach(() => {
+        cy.anonymous_token();
+        cy.login_token();
+    })
 
 //Recover Password
     it('Recover Password', () =>{
@@ -110,6 +108,7 @@ describe('Recover Password', () => {
             expect(response.body).to.have.property('message', 'phone number not registered');
             expect(response.body).to.have.property('status', 'not_found');
         })
+
     })
 
 //Recover Password - Incomplete Signup 

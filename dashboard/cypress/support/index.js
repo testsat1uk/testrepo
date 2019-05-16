@@ -20,7 +20,6 @@ import './commands'
 // require('./commands')
 
 Cypress.Screenshot.defaults({
-  //capture: 'app', // or 'runner'
   capture: 'fullPage',
   waitForCommandSynchronization: false,
   scale: true,
@@ -31,5 +30,8 @@ Cypress.Screenshot.defaults({
   afterScreenshot: (document) => {},
 })
 
-
-
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  return false
+})

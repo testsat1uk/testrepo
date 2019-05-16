@@ -1,12 +1,7 @@
 
-/// <reference types="Cypress" />
-
-//Happy Path User Journey
-
 describe('User Signup', () => {
 
-//Anonymous token, User Login Token, Refresh Token
-    it('Anonymous token, User Login Token, User Refresh Token', () =>{
+    beforeEach(() => {
         cy.anonymous_token();
         cy.login_token();
     })

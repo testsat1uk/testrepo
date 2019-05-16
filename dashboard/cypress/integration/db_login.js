@@ -15,8 +15,8 @@ describe('Working with login', () => {
 	})
 
 	context('When logging in with success', () => {
-		const userName = Cypress.env('userName')
-		const password = Cypress.env('password')
+		const userName = Cypress.env('dl_userName')
+		const password = Cypress.env('dl_password')
 
 		it('should login', () => {
 			cy.server()
@@ -35,7 +35,7 @@ describe('Working with login', () => {
 	})
 
 	context('When logging in with invalid password', () =>{
-		const userName = Cypress.env('userName')
+		const userName = Cypress.env('dl_userName')
 		const password = 'asdad'
 
 		it('should not login', () =>{
@@ -54,7 +54,7 @@ describe('Working with login', () => {
 
 	context('When logging in with invalid userName', () =>{
 		const userName = 'test@test.com'
-		const password = Cypress.env('password')
+		const password = Cypress.env('dl_password')
 
 		it('should not login', () =>{
 			cy.server()

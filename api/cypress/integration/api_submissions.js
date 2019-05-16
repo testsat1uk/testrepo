@@ -1,9 +1,6 @@
-/// <reference types="Cypress" />
-
 describe('User - Submissions', () => {
 
-	//Anonymous token, User Login Token, Refresh Token
-    it('Anonymous token, User Login Token, User Refresh Token', () =>{
+    beforeEach(() => {
         cy.anonymous_token();
         cy.login_token();
     })
@@ -22,13 +19,13 @@ describe('User - Submissions', () => {
             })
             .then((response) => {
                 expect(response.status).to.eq(200);
-                Loop1: for (var i=0; i<response.body.data.length;i++){
+                    Loop1: for (var i=0; i<response.body.data.length;i++){
                             if(response.body.data[i].status == 'final'){
                                 Cypress.env({submission_id: response.body.data[i].id});
                                 Cypress.env({project_id: response.body.data[i].project_id})
                                 break Loop1;
                             } 
-                    }
+                        }
                 if(Array.isArray(response.body.data) && response.body.data.length>0)
                    expect(response.body.data).not.to.be.empty;
                 else

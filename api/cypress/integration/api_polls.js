@@ -1,12 +1,11 @@
-/// <reference types="Cypress" />
 
 describe('User - Polls', () => {
 
-//Anonymous token, User Login Token, Refresh Token
-    it('Anonymous token, User Login Token, User Refresh Token, Submission Id, Project Id', () =>{
+    beforeEach(() => {
         cy.anonymous_token();
         cy.login_token();
-        cy.submission_project_id();
+        cy.project_submissions();
+        //cy.cards();
     })
 
 /*/Polls  - Id

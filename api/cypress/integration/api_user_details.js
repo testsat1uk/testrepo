@@ -1,12 +1,10 @@
-/// <reference types="Cypress" />
 
 describe('User Details - Get, Update', () => {
 
-//Anonymous Token
-	it('Anonymous Token', () => {
-		cy.anonymous_token();
-		cy.login_token();
-	})
+    beforeEach(() => {
+        cy.anonymous_token();
+        cy.login_token();
+    })
 
 //User - Verify Accepted Consents
     it('Verify User Accepted Consents', () => {

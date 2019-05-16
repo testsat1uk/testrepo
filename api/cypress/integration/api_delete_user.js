@@ -1,12 +1,10 @@
-/// <reference types="Cypress" />
 
 describe('Delete User', () => {
 
-//Anonymous Token
-	it('Anonymous Token, Login Token, Refresh Token', () => {
-		cy.anonymous_token();
-		cy.login_token();
-	})
+    beforeEach(() => {
+        cy.anonymous_token();
+        cy.login_token();
+    })
 
 
 /**************************** NEGATIVE TESTS ****************************/
