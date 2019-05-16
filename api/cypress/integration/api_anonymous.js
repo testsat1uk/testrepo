@@ -1,6 +1,4 @@
 
-/// <reference types="Cypress" />
-
 describe('Anonymous User', () => {
 
 //Anonymous User - Authorization Token

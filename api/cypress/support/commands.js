@@ -24,6 +24,8 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+
+//B2C APIs COMMANDS
 // -- Anonymous User Token
 Cypress.Commands.add('anonymous_token', () =>{
 		cy
@@ -71,34 +73,92 @@ Cypress.Commands.add('login_token', () =>{
 		})	
 })
 
-// -- User Submission Id, Project Id
-Cypress.Commands.add('submission_project_id', () =>{
-	    cy
+//User - Cards in Progress
+Cypress.Commands.add('progressCard', () => {
+        cy
             .request({
                 method:'GET',
-                url:'v3/users/me/submissions',
+                url:'v7/cards',
                 headers:{
                     'content-type':'application/json',
                     'accept':'application/json',
-                    'authorization':'Bearer '+Cypress.env('login_token')
+                    'authorization':'Bearer '+ Cypress.env('login_token')
+                },
+                qs:{
+                    'lat':Cypress.env('lon_latitue'),
+                    'lng':Cypress.env('lon_longitude')
                 }
             })
             .then((response) => {
-                Loop1: for (var i=0; i<response.body.data.length;i++){
-                            if(response.body.data[i].status == 'final'){
-                                Cypress.env({submission_id: response.body.data[i].id});
-                                Cypress.env({project_id: response.body.data[i].project_id})
+                expect(response.status).to.eq(200);
+                if(Array.isArray(response.body.data) && response.body.data.length>0)
+                {
+                    expect(response.body.data).not.to.be.empty;
+                    Loop1: for (var i=0; i<response.body.data.length;i++){
+                            if(response.body.data[i].project.user_submission.status == 'progress'){
+                                cy.log(response.body.data[i].project.user_submission.id)
+                                Cypress.env({progress_submission_id: response.body.data[i].project.user_submission.id});
+                                Cypress.env({progress_project_id: response.body.data[i].project_id})
                                 break Loop1;
                             } 
-                    }
+                        }
+                }
+                else
+                    expect(response.body.data).to.be.empty;
+            })         
+    })
+
+// Project id, Chart Survey Item Id
+Cypress.Commands.add('project_submissions', () => {
+
+    cy
+        .request({
+            method:'GET',
+            url:'v3/users/me/submissions',
+            headers:{
+                'content-type':'application/json',
+                'accept':'application/json',
+                'authorization':'Bearer '+Cypress.env('login_token')
+            }
         })
+        .then((response) => {
+            expect(response.status).to.eq(200);
+            if(Array.isArray(response.body.data) && response.body.data.length>0)
+                Loop1: for (var i=0; i<response.body.data.length;i++){
+                    Cypress.env({proj_id: response.body.data[i].project_id})
+                    Cypress.env({submission_id: response.body.data[i].id})
+                    cy.log(response.body.data[i].project_id)
+                    cy.log(response.body.data[i].id)
+                    cy
+                        .request({
+                            method:'GET',
+                            url:'v2/submissions/' + response.body.data[i].id +'/answers',
+                            headers:{
+                                'content-type':'application/json',
+                                'accept':'application/json',
+                                'authorization':'Bearer '+Cypress.env('login_token')
+                            }
+                        })
+                        .then((response) => {
+                            expect(response.status).to.eq(200);
+                            if(Array.isArray(response.body.data) && response.body.data.length>0){
+                                Loop2: for (var i=0;i<response.body.data.length;i++){
+                                    if (response.body.data[i].response_type == 'radio' || response.body.data[i].response_type == 'checkbox'){
+                                        Cypress.env({surey_item_id: response.body.data[i].survey_item_id})
+                                        Cypress.env({question_id: response.body.data[i].question_id})
+                                        break Loop2;
+                                    }
+                                }
+                            }
+                            else
+                                expect(response.body.data[0]).to.be.empty;
+                        })  
+                        break Loop1;                       
+            }
+            else
+                expect(response.body.data).to.be.empty;
+        })         
+
 })
-
-
-
-
-
-
-
 
 

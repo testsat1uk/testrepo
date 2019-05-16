@@ -1,15 +1,15 @@
 {
-  "name": "sbadmin",
+  "name": "smoketests",
   "version": "1.0.0",
-  "description": "Cypress tests",
+  "description": "Smoke Tests for SB",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress": "cypress open"
   },
-  "author": "satheesh",
+  "author": "Satheesh",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^3.1.4"
+    "cypress": "^3.1.5"
   }
 }

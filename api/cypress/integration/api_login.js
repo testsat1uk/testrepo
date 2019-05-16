@@ -1,10 +1,9 @@
-/// <reference types="Cypress"/>
+
 describe('User - Login', () => {
 
-//Anonymous Token
-	it('Anonymous Token', () => {
-		cy.anonymous_token();
-	})
+    beforeEach(() => {
+        cy.anonymous_token();
+    })
 
 //User - Login (V2)
 	it('Login - V2', () => {
@@ -33,7 +32,7 @@ describe('User - Login', () => {
                 Cypress.env({login_token:response.body.data.token});
                 Cypress.env({user_id:response.body.data.id});
                 Cypress.env({refresh_token:response.body.data.refresh_token});
-		})	
+                cy.log(response.body.data.refresh_token);		})	
 	})
 
 //User - Login (V1)
@@ -60,9 +59,6 @@ describe('User - Login', () => {
                 expect(response.status).to.eq(200);
                 expect(response.body).to.have.property('status','success');
                 expect(response.body.data).to.have.property('email','satheesh@streetbees.com');
-                Cypress.env({login_token:response.body.data.token});
-                Cypress.env({user_id:response.body.data.id});
-                Cypress.env({refresh_token:response.body.data.refresh_token});
         })  
     })
 

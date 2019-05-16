@@ -1,10 +1,7 @@
-/// <reference types="Cypress" />
-
 
 describe('Cards - User, Geolocation', () => {
 
-//Anonymous token, User Login Token, Refresh Token
-    it('Anonymous token, User Login Token, User Refresh Token', () =>{
+    beforeEach(() => {
         cy.anonymous_token();
         cy.login_token();
     })
@@ -12,7 +9,6 @@ describe('Cards - User, Geolocation', () => {
 //User - All Available Cards
     it('User - All Available Cards (V7)', () => {
         cy
-
             .request({
                 method:'GET',
                 url:'v7/cards',
@@ -31,20 +27,25 @@ describe('Cards - User, Geolocation', () => {
                 if(Array.isArray(response.body.data) && response.body.data.length>0)
                 {
                     expect(response.body.data).not.to.be.empty;
-                    Cypress.env({card_id: response.body.data[0].uid});
+                    Loop1: for (var i=0; i<response.body.data.length;i++){
+                            if(response.body.data[i].type == 'Project'){
+                                Cypress.env({project_id: response.body.data[i].project.id})
+                                break Loop1;
+                            } 
+                    }
                 }
                 else
                     expect(response.body.data).to.be.empty;
             })         
     })
 
-/*/Card - Hide (Update Visibility to False)
+//Card - Hide (Update Visibility to False)
     it('User - Hide Card', () => {
         cy
 
             .request({
                 method:'POST',
-                url:'v1/cards/'+ Cypress.env('card_id')+'/hide',
+                url:'v1/cards/'+ Cypress.env('project_id')+'/hide',
                 headers:{
                     'content-type':'application/json',
                     'accept':'application/json',
@@ -63,7 +64,7 @@ describe('Cards - User, Geolocation', () => {
 
             .request({
                 method:'POST',
-                url:'v1/cards/'+ Cypress.env('card_id')+'/show',
+                url:'v1/cards/'+ Cypress.env('project_id')+'/show',
                 headers:{
                     'content-type':'application/json',
                     'accept':'application/json',
@@ -74,8 +75,6 @@ describe('Cards - User, Geolocation', () => {
                 expect(response.status).to.eq(200);
         })         
     })
-
-*/
 
 //User - All Available (V6)
     it('User - All Available Cards (V6)', () => {

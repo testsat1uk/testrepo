@@ -18,3 +18,20 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.Screenshot.defaults({
+  capture: 'fullPage',
+  waitForCommandSynchronization: false,
+  scale: true,
+  disableTimersAndAnimations: true,
+  screenshotOnRunFailures: true,
+  blackout: ['selectors'],
+  beforeScreenshot: (document) => {},
+  afterScreenshot: (document) => {},
+})
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  return false
+})

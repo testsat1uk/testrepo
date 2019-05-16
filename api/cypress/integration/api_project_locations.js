@@ -1,12 +1,10 @@
-/// <reference types="Cypress" />
 
 describe('Projects - User Location', () => {
 
-//Anonymous token, User Login Token, Refresh Token
-    it('Anonymous token, User Login Token, User Refresh Token, Submission Id, Project Id', () =>{
+    beforeEach(() => {
         cy.anonymous_token();
         cy.login_token();
-        cy.submission_project_id();
+        cy.project_submissions();
     })
 
 
@@ -15,7 +13,7 @@ describe('Projects - User Location', () => {
         cy
             .request({
                 method:'GET',
-                url:'v1/projects/' + Cypress.env('project_id') +'/locations',
+                url:'v1/projects/' + Cypress.env('proj_id') +'/locations',
                 headers:{
                     'content-type':'application/json',
                     'accept':'application/json',
@@ -38,7 +36,7 @@ describe('Projects - User Location', () => {
         cy
             .request({
                 method:'GET',
-                url:'v1/projects/' + Cypress.env('project_id') +'/locations',
+                url:'v1/projects/' + Cypress.env('proj_id') +'/locations',
                 failOnStatusCode:false,
                 headers:{
                     'content-type':'application/json',
@@ -59,7 +57,7 @@ describe('Projects - User Location', () => {
         cy
             .request({
                 method:'GET',
-                url:'v1/projects/' + Cypress.env('project_id') +'/locations',
+                url:'v1/projects/' + Cypress.env('proj_id') +'/locations',
                 failOnStatusCode:false,
                 headers:{
                     'content-type':'application/json',
@@ -77,7 +75,7 @@ describe('Projects - User Location', () => {
         cy
             .request({
                 method:'GET',
-                url:'v1/projects/' + Cypress.env('project_id') +1 +'/locations',
+                url:'v1/projects/' + Cypress.env('proj_id') +1 +'/locations',
                 failOnStatusCode:false,
                 headers:{
                     'content-type':'application/json',

@@ -1,12 +1,28 @@
 {
-  "baseUrl": "https://insights.streetbees.com",
+  "baseUrl": "https://api.streetbees.com",
+  
+  "env": {
+    "android_key": "djib8ao2qj_android",
+    "phone_number": "7795467636",
+    "password": "Kanishka27$",
+    "lon_latitue":"51.4200431",
+    "lon_longitude":"-0.3166893",
+    "iOS_key": "o4vo64fqgq_ios",
+    "chart_proj_id":"4964",
+    "chart_survey_id":"232230",
 
-  "env":{
-  	"userName":"admin@streetbees.com",
-  	"password":"Dzb6mEKA8AiKRk7",
+    "dl_userName":"admin@streetbees.com",
+  	"dl_password":"Dzb6mEKA8AiKRk7",
   	"client": "test",
   	"dashBoard": "demoboardtest",
-  	"api_url": "https://dashlord-api.streetbees.com"
+  	"api_url": "https://dashlord-api.streetbees.com",
+  	"dashlord_url": "https://insights.streetbees.com",
+
+    "dev_admin_url": "https://staging-sb-api-admin-pr-1763.dev-bees.com/",
+    "admin_url": "https://streetbees-admin-staging.herokuapp.com/",
+    "p_admin_url": "https://admin.streetbees.com/",
+    "admin_userName": "god@streetbees.com",
+    "admin_password": "password"
   },
-  "projectId": "yc8eyx"
+  "projectId": "pfqktt"
 }

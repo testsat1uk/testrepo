@@ -1,10 +1,7 @@
 
-/// <reference types="Cypress" />
-
 describe('Reference Data', () => {
 
-//Anonymous token, User Login Token, Refresh Token
-    it('Anonymous token, User Login Token, User Refresh Token', () =>{
+    beforeEach(() => {
         cy.anonymous_token();
         cy.login_token();
     })
